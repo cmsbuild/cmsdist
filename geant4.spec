@@ -32,7 +32,8 @@ if [ $(uname) = Darwin ]; then
   SOEXT=dylib
 fi
 
-mkdir ../build
+rm -rf ../build
+mkdir -p ../build
 cd ../build
 
 cmake ../%{n}.%{realversion} \
@@ -47,6 +48,7 @@ cmake ../%{n}.%{realversion} \
   -DCLHEP_ROOT_DIR:PATH="$CLHEP_ROOT" \
   -DEXPAT_INCLUDE_DIR:PATH="$EXPAT_ROOT/include" \
   -DEXPAT_LIBRARY:FILEPATH="$EXPAT_ROOT/lib/libexpat.$SOEXT" \
+  -DBUILD_STATIC_LIBS=ON
 
 make %makeprocesses VERBOSE=1
 
